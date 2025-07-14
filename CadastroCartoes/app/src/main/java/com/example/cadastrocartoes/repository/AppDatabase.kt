@@ -6,22 +6,21 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.cadastrocartoes.dao.CartaoDao
 import com.example.cadastrocartoes.model.CartaoModel
-import com.example.cadastrocartoes.repository.dao.CartaoDao
 
 @Database(entities = [CartaoModel::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-
+abstract class AppDataBase : RoomDatabase() {
     abstract fun cartaoDAO(): CartaoDao
 
     companion object {
-        private lateinit var INSTANCE: AppDatabase
+        private lateinit var INSTANCE: AppDataBase
 
-        fun getDataBase(context: Context): AppDatabase {
+        fun getDataBase(context: Context): AppDataBase {
             if (!::INSTANCE.isInitialized) {
-                synchronized(AppDatabase::class) {
+                synchronized(AppDataBase::class) {
                     INSTANCE =
-                        Room.databaseBuilder(context, AppDatabase::class.java, "cartaodb")
+                        Room.databaseBuilder(context, AppDataBase::class.java, "cartaodb")
                             .addMigrations(
                                 MIGRATION_1_2, MIGRATION_2_3
                             ).allowMainThreadQueries().build()

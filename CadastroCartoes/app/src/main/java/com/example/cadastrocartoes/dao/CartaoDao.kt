@@ -1,4 +1,4 @@
-package com.example.cadastrocartoes.repository.dao
+package com.example.cadastrocartoes.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -13,15 +13,14 @@ interface CartaoDao {
     fun insertCartao(cartao: CartaoModel) : Long
 
     @Update
-    fun updateUser(cartao: CartaoModel): Int
+    fun updateCartao(cartao: CartaoModel): Int
 
     @Delete
-    fun deleteUser(cartao: CartaoModel): Int
+    fun deleteCartao(cartao: CartaoModel): Int
 
-    @Query("SELECT * FROM Cartao WHERE id_cartao = :id")
+    @Query("SELECT * FROM TB_CARTAO WHERE id_cartao = :id")
     fun get(id: Int): CartaoModel
 
-    @Query("SELECT * FROM Cartao")
+    @Query("SELECT * FROM TB_CARTAO")
     fun getAll(): List<CartaoModel>
-
 }
